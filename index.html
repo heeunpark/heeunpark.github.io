@@ -17,7 +17,7 @@
     { "@type": "CollegeOrUniversity", "name": "Bentley University" }
   ],
   "url": "https://heeunpark.github.io/",
-  "sameAs": ["https://orcid.org/0009-0002-7717-0502"]
+  "sameAs": ["https://orcid.org/0009-0002-7717-0502", "https://scholar.google.com/citations?user=VzWH-F4AAAAJ&hl=en"]
 }
 </script>
 <style>
@@ -25,18 +25,26 @@
     --bg: #ffffff;
     --ink: #151a23;
     --muted: #485163;
-    --rule: #dfe3ea;
+    --rule: #cdd3de;
+    --rule-strong: #2a3345;
     --accent: #14477f;
-    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
-    --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", "Helvetica Neue", Arial, sans-serif;
+    --tint: #edf3fa;
+    --ok: #1f6b3a;
+    --warn: #8a5600;
+    --serif: var(--sans);
+    --sans: "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
   }
   @media (prefers-color-scheme: dark) {
     :root {
       --bg: #0f131a;
       --ink: #e9ecf3;
       --muted: #a6afc0;
-      --rule: #272d3a;
+      --rule: #343c4d;
+      --rule-strong: #6b768b;
       --accent: #8dbaf2;
+      --tint: #16202e;
+      --ok: #7fd1a0;
+      --warn: #e6b85c;
     }
   }
   * { box-sizing: border-box; }
@@ -60,20 +68,17 @@
     margin: 0 auto;
     padding: 0 28px;
     display: grid;
-    grid-template-columns: 236px minmax(0, 1fr);
-    column-gap: 60px;
+    grid-template-columns: 280px minmax(0, 1fr);
+    column-gap: 0;
   }
 
   .icon { width: 1.1em; height: 1.1em; flex: none; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 
   /* Sidebar */
-  aside {
-    position: sticky; top: 0; align-self: start;
-    max-height: 100vh; overflow-y: auto;
-    padding: 48px 0 32px;
-  }
+  aside { padding: 40px 36px 32px 0; }
   .portrait {
-    display: block; width: 160px; height: auto;
+    display: block; width: 100%; height: auto; aspect-ratio: 1 / 1;
+    object-fit: cover; object-position: center top;
     border-radius: 6px; border: 1px solid var(--rule);
   }
   h1 {
@@ -81,66 +86,89 @@
     font-size: 1.75rem; line-height: 1.2; font-weight: 700;
     margin: 20px 0 6px; letter-spacing: -0.01em;
   }
-  .role { margin: 0; color: var(--muted); font-size: 0.93rem; line-height: 1.5; }
+  .role { margin: 0; color: var(--muted); font-size: 0.88rem; line-height: 1.5; }
+  .role.adv { margin-top: 6px; }
   .contact { list-style: none; margin: 18px 0 0; padding: 0; font-size: 0.9rem; line-height: 1.5; }
   .contact a { white-space: nowrap; }
   .contact li { margin: 0 0 6px; display: flex; align-items: center; gap: 9px; }
   .contact .icon { color: var(--muted); }
+  .contact .profiles { flex-wrap: wrap; gap: 6px 18px; }
+  .contact .profiles span { display: inline-flex; align-items: center; gap: 9px; }
+  .cv { margin: 16px 0 0; }
+  .cv .btn { padding: 9px 16px; }
   .contact .plain { color: var(--muted); }
 
-  nav { margin-top: 26px; padding-top: 18px; border-top: 1px solid var(--rule); }
+  nav { margin-top: 20px; padding-top: 14px; border-top: 1px solid var(--rule); position: sticky; top: 24px; }
   nav ul { list-style: none; margin: 0; padding: 0; }
   nav a {
-    display: flex; align-items: center; gap: 10px; padding: 6px 0 6px 12px; margin-left: -12px;
+    display: flex; align-items: center; gap: 10px; padding: 4px 0 4px 12px; margin-left: -12px;
     color: var(--muted); text-decoration: none; font-size: 0.96rem;
     border-left: 2px solid transparent;
   }
   nav a:hover { color: var(--ink); }
   nav a[aria-current="true"] .icon { color: var(--accent); }
-  nav a[aria-current="true"] { color: var(--ink); font-weight: 600; border-left-color: var(--accent); }
+  nav a[aria-current="true"] { color: var(--ink); font-weight: 600; border-left-color: var(--accent); background: var(--tint); }
 
   /* Content */
-  main { padding: 48px 0 40px; max-width: 700px; }
-  section { margin: 0 0 60px; scroll-margin-top: 32px; }
+  main { padding: 48px 0 40px 56px; max-width: 756px; border-left: 1px solid var(--rule); }
+  section { margin: 0 0 72px; scroll-margin-top: 32px; }
   h2 {
     font-family: var(--serif);
     font-size: 1.6rem; line-height: 1.25; font-weight: 700;
-    margin: 0 0 20px; padding-bottom: 10px;
-    border-bottom: 1px solid var(--rule);
+    margin: 0 0 22px; padding-bottom: 10px; letter-spacing: -0.01em;
+    border-bottom: 2px solid var(--rule-strong);
   }
   .dl { display: inline-flex; align-items: center; gap: 8px; }
-  h3 { font-size: 1rem; font-weight: 700; margin: 32px 0 14px; color: var(--ink); }
+  .btn { display: inline-flex; align-items: center; gap: 9px; padding: 10px 20px; background: var(--accent); color: var(--bg); border-radius: 6px; font-weight: 600; font-size: 0.95rem; text-decoration: none; }
+  .btn:hover { text-decoration: none; filter: brightness(1.12); }
+  .btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+  h3 { font-size: 1.12rem; font-weight: 700; margin: 44px 0 10px; padding-bottom: 8px; color: var(--ink); border-bottom: 1px solid var(--rule); }
   p { margin: 0 0 14px; }
   ul { margin: 0; padding: 0; list-style: none; }
 
   .about p { font-size: 1.04rem; }
-  .facts { margin: 22px 0 0; padding-top: 18px; border-top: 1px solid var(--rule); display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 8px 18px; font-size: 0.95rem; }
-  .facts dt { font-weight: 700; }
-  .facts dd { margin: 0; color: var(--muted); }
+  .facts { margin: 26px 0 0; padding-top: 22px; border-top: 1px solid var(--rule); display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 16px 18px; align-items: start; }
+  .facts dt { font-weight: 700; font-size: 0.95rem; padding-top: 4px; }
+  .facts dd { margin: 0; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chips li { margin: 0; padding: 3px 11px; border: 1px solid var(--rule); border-radius: 6px; font-size: 0.9rem; line-height: 1.5; color: var(--muted); }
+  .chips li.primary { color: var(--ink); font-weight: 600; border-color: var(--accent); background: var(--tint); }
 
-  .paper { margin: 0 0 20px; }
+  .paper { margin: 0; padding: 14px 0; border-top: 1px solid var(--rule); }
+  .paper:first-child { border-top: 0; padding-top: 0; }
   .paper .title { font-weight: 600; line-height: 1.45; }
   .paper .authors { color: var(--muted); font-size: 0.95rem; margin-top: 2px; }
   .paper .venue { font-size: 0.95rem; margin-top: 2px; }
   .me { font-weight: 700; color: var(--ink); }
   .status { color: var(--accent); font-size: 0.9rem; font-weight: 600; }
+  .status.revise { color: var(--warn); }
+  .status.done { color: var(--ok); }
+  .status.early { color: var(--muted); }
   .status::before {
     content: ""; display: inline-block; width: 7px; height: 7px; border-radius: 50%;
-    background: var(--accent); margin-right: 7px; transform: translateY(-1px);
+    background: currentColor; margin-right: 7px; transform: translateY(-1px);
   }
 
-  .jmp { border-left: 3px solid var(--accent); padding-left: 20px; }
+  .jmp { border-left: 3px solid var(--accent); background: var(--tint); padding: 22px 24px 8px 22px; border-radius: 0 6px 6px 0; }
   .jmp .title { font-family: var(--serif); font-size: 1.2rem; line-height: 1.35; font-weight: 700; }
   .jmp .venue { margin-top: 6px; }
   .jmp .abstract { margin: 16px 0 10px; }
   .jmp .kw { color: var(--muted); font-size: 0.93rem; margin-bottom: 14px; }
 
-  details { margin: 6px 0 0; }
-  summary { cursor: pointer; color: var(--accent); font-weight: 600; font-size: 0.95rem; padding: 6px 0; }
-  summary:hover { text-decoration: underline; }
-  details[open] > summary { margin-bottom: 14px; }
+  details { margin: 20px 0 0; }
+  summary {
+    list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 12px;
+    cursor: pointer; padding: 12px 16px; border: 1px solid var(--rule-strong); border-radius: 6px;
+    font-weight: 600; font-size: 0.95rem; color: var(--ink);
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "Show \25BE"; color: var(--accent); font-size: 0.9rem; white-space: nowrap; }
+  summary:hover { border-color: var(--accent); }
+  details[open] > summary { border-color: var(--accent); margin-bottom: 18px; }
+  details[open] > summary::after { content: "Hide \25B4"; }
 
-  .entry { margin: 0 0 26px; }
+  .entry { margin: 0 0 18px; }
+  .entry + .entry { border-top: 1px solid var(--rule); padding-top: 18px; }
   .entry-head { display: flex; justify-content: space-between; align-items: baseline; gap: 6px 20px; flex-wrap: wrap; }
   .entry-head strong { font-weight: 650; }
   .when { color: var(--muted); font-size: 0.93rem; white-space: nowrap; }
@@ -149,21 +177,25 @@
   .bullets { margin: 8px 0 0; padding-left: 1.1rem; list-style: disc; }
   .bullets li { margin: 0 0 5px; padding-left: 2px; }
   .bullets li::marker { color: var(--muted); }
-  .compact li { margin-bottom: 12px; }
+  .compact li { margin: 0; padding: 12px 0; border-top: 1px solid var(--rule); }
+  .compact li:first-child { border-top: 0; padding-top: 0; }
 
-  footer { max-width: 700px; padding: 0 0 56px; color: var(--muted); font-size: 0.9rem; }
+  footer { max-width: 756px; padding: 0 0 56px 56px; color: var(--muted); font-size: 0.9rem; }
 
   @media (max-width: 860px) {
     .layout { display: block; padding: 0 22px; }
-    aside { position: static; max-height: none; overflow: visible; padding: 36px 0 0; }
-    .portrait { width: 128px; }
-    nav { margin-top: 22px; padding-top: 0; border-top: 0; border-bottom: 1px solid var(--rule); }
+    aside { padding: 36px 0 0; }
+    main { border-left: 0; padding-left: 0; max-width: none; }
+    footer { padding-left: 0; max-width: none; }
+    .portrait { width: 128px; aspect-ratio: auto; }
+    nav { position: static; margin-top: 22px; padding-top: 0; border-top: 0; border-bottom: 1px solid var(--rule); }
     nav ul { display: flex; gap: 20px; overflow-x: auto; padding-bottom: 10px; white-space: nowrap; }
     nav a { padding: 4px 0; margin-left: 0; border-left: 0; border-bottom: 2px solid transparent; }
     nav a[aria-current="true"] { border-bottom-color: var(--accent); }
     main { padding-top: 32px; }
-    .facts { grid-template-columns: 1fr; gap: 0; }
-    .facts dd { margin-bottom: 10px; }
+    .facts { grid-template-columns: 1fr; gap: 6px; }
+    .facts dt { padding-top: 0; }
+    .facts dd { margin-bottom: 14px; }
   }
 </style>
 </head>
@@ -174,9 +206,12 @@
   <symbol id="i-book" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol>
   <symbol id="i-users" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
   <symbol id="i-cap" viewBox="0 0 24 24"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></symbol>
+  <symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.48 12.89 17 22l-5-3-5 3 1.52-9.11"/></symbol>
   <symbol id="i-briefcase" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></symbol>
   <symbol id="i-mail" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></symbol>
   <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></symbol>
+  <symbol id="i-orcid" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="8" y1="11" x2="8" y2="16.5"/><circle cx="8" cy="7.9" r=".6"/><path d="M11.5 11h2.2a2.75 2.75 0 0 1 0 5.5h-2.2z"/></symbol>
   <symbol id="i-pin" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></symbol>
   <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></symbol>
 </svg>
@@ -184,22 +219,28 @@
 <div class="layout">
 
 <aside>
-  <img class="portrait" src="photo.png" alt="Portrait of Hee Un Park" width="160" height="213">
+  <img class="portrait" src="photo.png" alt="Portrait of Hee Un Park" width="244" height="244">
   <h1>Hee Un Park</h1>
-  <p class="role">Ph.D. in Business and Technology Management, KAIST (2026)<br>Visiting Lecturer, Joongbu University</p>
+  <p class="role">Ph.D. in Business and Technology Management, KAIST (2026)<br>Visiting Lecturer,<br>Joongbu University</p>
+  <p class="role adv">Advisor: Duk Hee Lee</p>
   <ul class="contact">
     <li><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg><a href="mailto:hupark37@business.kaist.edu">hupark37@business.kaist.edu</a></li>
-    <li><svg class="icon" aria-hidden="true"><use href="#i-link"/></svg><a href="https://orcid.org/0009-0002-7717-0502" rel="me">ORCID</a></li>
+    <li class="profiles">
+      <span><svg class="icon" aria-hidden="true"><use href="#i-orcid"/></svg><a href="https://orcid.org/0009-0002-7717-0502" rel="me">ORCID</a></span>
+      <span><svg class="icon" aria-hidden="true"><use href="#i-cap"/></svg><a href="https://scholar.google.com/citations?user=VzWH-F4AAAAJ&amp;hl=en" rel="me">Google Scholar</a></span>
+    </li>
     <li class="plain"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg>South Korea</li>
   </ul>
   <nav aria-label="Sections">
     <ul>
-      <li><a href="#about"><svg class="icon" aria-hidden="true"><use href="#i-user"/></svg>About me</a></li>
-      <li><a href="#jmp"><svg class="icon" aria-hidden="true"><use href="#i-star"/></svg>Job market paper</a></li>
+      <li><a href="#about"><svg class="icon" aria-hidden="true"><use href="#i-user"/></svg>About Me</a></li>
+      <li><a href="#jmp"><svg class="icon" aria-hidden="true"><use href="#i-star"/></svg>Job Market Paper</a></li>
       <li><a href="#research"><svg class="icon" aria-hidden="true"><use href="#i-book"/></svg>Research</a></li>
       <li><a href="#teaching"><svg class="icon" aria-hidden="true"><use href="#i-users"/></svg>Teaching</a></li>
-      <li><a href="#education"><svg class="icon" aria-hidden="true"><use href="#i-cap"/></svg>Education and awards</a></li>
+      <li><a href="#education"><svg class="icon" aria-hidden="true"><use href="#i-cap"/></svg>Education</a></li>
+      <li><a href="#awards"><svg class="icon" aria-hidden="true"><use href="#i-award"/></svg>Awards and Scholarships</a></li>
       <li><a href="#industry"><svg class="icon" aria-hidden="true"><use href="#i-briefcase"/></svg>Industry</a></li>
+      <li><a href="#references"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg>References</a></li>
     </ul>
   </nav>
 </aside>
@@ -208,19 +249,19 @@
 <main>
 
 <section id="about" class="about">
-  <h2>About me</h2>
+  <h2>About Me</h2>
   <p>I study why organizations facing the same emerging technology pursue different strategic paths. My research examines how firms interpret emerging technologies, how these interpretations shape external capability search, and how they translate into strategic action. I explore these questions through longitudinal research on corporate technological interpretations and strategic responses.</p>
   <p>Beyond academia, I founded and operate a Korean barbecue restaurant where introducing a robotic grilling system required redesigning workflows and staff responsibilities. This experience has deepened my interest in how organizations translate technological possibilities into operational realities.</p>
   <p>I am on the 2026&ndash;27 academic job market and am seeking faculty and postdoctoral research opportunities, with availability beginning in 2027.</p>
   <dl class="facts">
-    <dt>Fields</dt><dd>Technology and Innovation Management; Strategic Management; Organization Theory; Entrepreneurship</dd>
-    <dt>Methods</dt><dd>Panel-data and fixed-effects models; multinomial logistic regression; semi-structured literature review; Delphi studies and stakeholder interviews; quantitative content analysis and LLM-assisted content coding</dd>
-    <dt>Tools</dt><dd>Python, R, SQL</dd>
+    <dt>Fields</dt><dd><ul class="chips"><li class="primary">Technology and Innovation Management</li><li class="primary">Strategic Management</li><li class="primary">Organization Theory</li><li class="primary">Entrepreneurship</li></ul></dd>
+    <dt>Methods</dt><dd><ul class="chips"><li>Quantitative content analysis</li><li>LLM-assisted content coding</li><li>Panel-data and fixed-effects models</li><li>Multinomial logistic regression</li><li>Semi-structured literature review</li><li>Delphi studies and stakeholder interviews</li></ul></dd>
+    <dt>Tools</dt><dd><ul class="chips"><li>Python</li><li>R</li><li>SQL</li></ul></dd>
   </dl>
 </section>
 
 <section id="jmp">
-  <h2>Job market paper</h2>
+  <h2>Job Market Paper</h2>
   <div class="jmp">
     <div class="title">Extension Without Displacement: Interpretive Accretion in the Organizational Meaning of Emerging Technologies</div>
     <div class="venue"><span class="status">Working draft, November 2026</span></div>
@@ -257,7 +298,7 @@
     <li class="paper">
       <div class="title">When State-Embedded Intermediaries Matter: GovTech Integration Across Institutional Boundaries</div>
       <div class="authors">Cornejo, I., <span class="me">Park, H. U.</span> (corresponding author), &amp; Kim, S. K.</div>
-      <div class="venue"><em>Government Information Quarterly.</em> <span class="status">Under editorial review</span></div>
+      <div class="venue"><em>Government Information Quarterly.</em> <span class="status">Under review</span></div>
     </li>
     <li class="paper">
       <div class="title">Selecting Machine Learning Model Families for Customer Lifetime Value Prediction: A Transaction Complexity Perspective</div>
@@ -269,38 +310,72 @@
   <h3>Working papers</h3>
   <ul>
     <li class="paper">
+      <div class="title">The Strategic Configuration of Corporate AI: Deployment, Provision, and Value Orientations</div>
+      <div class="authors"><span class="me">Park, H. U.</span></div>
+      <div class="venue"><span class="status early">Manuscript in preparation</span></div>
+    </li>
+    <li class="paper">
       <div class="title">Problem Formulation in AI Capability Development: Answer Repertoires and Reconfiguration Loci</div>
-      <div class="venue"><span class="status">Under revision</span></div>
+      <div class="authors"><span class="me">Park, H. U.</span></div>
+      <div class="venue"><span class="status revise">Revising before submission</span></div>
     </li>
     <li class="paper">
       <div class="title">From Technological Prominence to Organizational Relevance: Sectoral Structure and Convergence</div>
-      <div class="venue"><span class="status">Completed; preparing for submission</span></div>
+      <div class="authors"><span class="me">Park, H. U.</span></div>
+      <div class="venue"><span class="status done">Completed; preparing for submission</span></div>
     </li>
     <li class="paper">
       <div class="title">When Technological Meaning Changes: Problem Representations and the Direction of External Capability Search</div>
-      <div class="venue"><span class="status">In preparation</span></div>
+      <div class="authors"><span class="me">Park, H. U.</span></div>
+      <div class="venue"><span class="status early">In preparation</span></div>
     </li>
   </ul>
 
   <details>
-    <summary>Research in progress (3)</summary>
+    <summary>Research in progress (4)</summary>
     <ul>
       <li class="paper">
         <div class="title">Passport or Anchor? Cross-Country Expansion and Market Deepening in Foreign-Government Markets</div>
         <div class="authors">Park, H. S., &amp; <span class="me">Park, H. U.</span> (corresponding author)</div>
-        <div class="venue"><span class="status">Data analysis completed</span></div>
+        <div class="venue"><span class="status early">Data analysis completed</span></div>
+      </li>
+      <li class="paper">
+        <div class="title">Beyond the Music: Lyrical Messages, Audience Reach, and Engagement in BTS Music Videos</div>
+        <div class="authors">Oh, J. S., &amp; <span class="me">Park, H. U.</span> (corresponding author)</div>
+        <div class="venue"><span class="status early">Manuscript in preparation</span></div>
       </li>
       <li class="paper">
         <div class="title">When Search Becomes a Trajectory: Repeated Public R&amp;D Participation and the Durability of Technological Reorientation</div>
         <div class="authors"><span class="me">Park, H. U.</span>, &amp; Lee, K. Y.</div>
-        <div class="venue"><span class="status">Data analysis in progress</span></div>
+        <div class="venue"><span class="status early">Data analysis in progress</span></div>
       </li>
       <li class="paper">
         <div class="title">When AI Actions Multiply: Implementation Portfolios and the Reorganization of Responsibility</div>
-        <div class="venue"><span class="status">In progress</span></div>
+        <div class="venue"><span class="status early">In progress</span></div>
       </li>
     </ul>
   </details>
+
+  <h3>Funded research projects</h3>
+  <ul class="compact">
+    <li>
+      <div class="entry-head"><strong>Global Ph.D. Fellowship: Individual Doctoral Research Project</strong><span class="when">2019&ndash;2020</span></div>
+      <p class="sub">Principal Investigator, funded by the National Research Foundation of Korea (NRF). Selected for a nationally competitive, government-funded doctoral research fellowship and served as the designated principal investigator of an individually funded doctoral research project.</p>
+    </li>
+    <li>
+      <div class="entry-head"><strong>Digital Government Export Product Feasibility Project</strong><span class="when">Sep.&ndash;Dec. 2023</span></div>
+      <p class="sub">Researcher, KAIST; funded by the National Information Society Agency. Comparative assessment of export potential of Korean digital government services across 14 countries.</p>
+    </li>
+    <li>
+      <div class="entry-head"><strong>Digital Innovation and Convergence Framework Project</strong><span class="when">Dec. 2021&ndash;May 2022</span></div>
+      <p class="sub">Researcher, KAIST; funded by the Ministry of Science and ICT. Interviews with 20 participants and a two-round Delphi study with 52 experts.</p>
+    </li>
+  </ul>
+
+  <h3>Conference presentation</h3>
+  <ul class="compact">
+    <li><span class="me">Park, H. U.</span>, Kim, S. K., &amp; Rho, J. J. (2019). Identifying the elements of a manufacturing platform based on manufacturing flexibility for startups and factories. International Conference of Supply Chain &amp; Technology Innovation (ICOSTI 2019), Busan, South Korea.</li>
+  </ul>
 </section>
 
 <section id="teaching">
@@ -338,9 +413,8 @@
 </section>
 
 <section id="education">
-  <h2>Education and awards</h2>
+  <h2>Education</h2>
 
-  <h3 style="margin-top:0">Education</h3>
   <div class="entry">
     <div class="entry-head"><strong>Ph.D., Business and Technology Management</strong><span class="when">Aug. 2026</span></div>
     <p class="sub ink">Korea Advanced Institute of Science and Technology (KAIST), Daejeon</p>
@@ -349,42 +423,27 @@
   </div>
   <div class="entry">
     <div class="entry-head"><strong>M.S., Information Management</strong><span class="when">Feb. 2017</span></div>
-    <p class="sub ink">KAIST, Seoul</p>
+    <p class="sub ink">Korea Advanced Institute of Science and Technology (KAIST), College of Business, Seoul</p>
     <p class="sub">Advisor: Daegon Cho</p>
   </div>
   <div class="entry">
     <div class="entry-head"><strong>B.S., Accountancy</strong><span class="when">Jun. 2014</span></div>
     <p class="sub ink">Bentley University, Waltham, MA, USA</p>
   </div>
+</section>
 
-  <h3>Fellowships and awards</h3>
+<section id="awards">
+  <h2>Awards and Scholarships</h2>
   <ul class="compact">
-    <li><div class="entry-head"><span>Global Ph.D. Fellowship, National Research Foundation of Korea</span><span class="when">2019</span></div></li>
+    <li><div class="entry-head"><span>Global Ph.D. Fellowship, National Research Foundation of Korea</span><span class="when">2019&ndash;2020</span></div></li>
     <li><div class="entry-head"><span>KAIST Scholarship</span><span class="when">2018&ndash;2026</span></div></li>
     <li><div class="entry-head"><span>Challenge Award, Case Competition, KAIST College of Business</span><span class="when">2018</span></div></li>
     <li><div class="entry-head"><span>Merit Award, Case Competition, KAIST College of Business</span><span class="when">2016</span></div></li>
   </ul>
-
-  <h3>Funded research projects</h3>
-  <ul class="compact">
-    <li>
-      <div class="entry-head"><strong>Digital Government Export Product Feasibility Project</strong><span class="when">Sep.&ndash;Dec. 2023</span></div>
-      <p class="sub">Researcher, KAIST; funded by the National Information Society Agency. Comparative assessment of export potential of Korean digital government services across 14 countries.</p>
-    </li>
-    <li>
-      <div class="entry-head"><strong>Digital Innovation and Convergence Framework Project</strong><span class="when">Dec. 2021&ndash;May 2022</span></div>
-      <p class="sub">Researcher, KAIST; funded by the Ministry of Science and ICT. Interviews with 20 participants and a two-round Delphi study with 52 experts.</p>
-    </li>
-  </ul>
-
-  <h3>Conference presentation</h3>
-  <ul class="compact">
-    <li><span class="me">Park, H. U.</span>, Kim, S. K., &amp; Rho, J. J. (2019). Identifying the elements of a manufacturing platform based on manufacturing flexibility for startups and factories. International Conference of Supply Chain &amp; Technology Innovation (ICOSTI 2019), Busan.</li>
-  </ul>
 </section>
 
 <section id="industry">
-  <h2>Industry and entrepreneurship</h2>
+  <h2>Industry and Entrepreneurship</h2>
   <ul class="compact">
     <li>
       <div class="entry-head"><strong>Founder, Soot: The Grill</strong><span class="when">2025&ndash;present</span></div>
@@ -418,11 +477,17 @@
   </details>
 </section>
 
+<section id="references">
+  <h2>References</h2>
+  <p>References are available upon request. Please get in touch and I will share contact details for my references.</p>
+  <p><a class="btn" href="mailto:hupark37@business.kaist.edu?subject=Request%20for%20references"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg>Contact</a></p>
+</section>
+
 </main>
 
 <footer>
-  References available upon request.<br>
-  Last updated November 2026.
+  Last updated November 2026.<br>
+  &copy; 2026 Hee Un Park
 </footer>
 </div>
 
