@@ -61,8 +61,10 @@
   }
   h1 { font-size: 2rem; line-height: 1.2; margin: 0 0 6px; letter-spacing: -0.01em; }
   .role { margin: 0; color: var(--muted); }
-  .contact { margin: 14px 0 0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 0.92rem; }
-  .contact span + span::before { content: "·"; margin: 0 10px; color: var(--muted); }
+  .contact { margin: 14px 0 0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 0.92rem; display: flex; flex-wrap: wrap; gap: 4px 20px; }
+  .bio { margin-top: 26px; }
+  .bio p { margin: 0 0 12px; font-size: 1.02rem; }
+  .bio p:last-child { margin-bottom: 0; }
 
   nav {
     position: sticky; top: 0; z-index: 5;
@@ -130,6 +132,11 @@
       </p>
     </div>
   </div>
+  <div class="wrap bio">
+    <p>I study why organizations facing the same emerging technology pursue different strategic paths. My research examines how firms interpret emerging technologies, how these interpretations shape external capability search, and how they translate into strategic action. I explore these questions through longitudinal research on corporate technological interpretations and strategic responses.</p>
+    <p>Beyond academia, I founded and operate a Korean barbecue restaurant where introducing a robotic grilling system required redesigning workflows and staff responsibilities. This experience has deepened my interest in how organizations translate technological possibilities into operational realities.</p>
+    <p>I am on the 2026&ndash;27 academic job market and am seeking faculty and postdoctoral research opportunities, with availability beginning in 2027.</p>
+  </div>
 </header>
 
 <nav>
@@ -149,7 +156,7 @@
 <section id="research">
   <h2>Research</h2>
   <p><strong>Fields:</strong> Technology and Innovation Management; Strategic Management; Organization Theory</p>
-  <p>My research investigates why organizations facing similar technological changes pursue different strategic trajectories. I examine how evolving problem representations shape the direction, scope, and pace of capability search, the configuration of strategic actions, and the durability of organizational commitments. My current work explores these relationships through longitudinal analyses of corporate technological interpretations, external capability search, and strategic responses to emerging technologies.</p>
+  <p>I examine how evolving problem representations shape the direction, scope, and pace of capability search, the configuration of strategic actions, and the durability of organizational commitments.</p>
   <p class="sub"><strong>Methods:</strong> panel-data and fixed-effects models; multinomial logistic regression; semi-structured literature review; Delphi studies and stakeholder interviews; quantitative content analysis and LLM-assisted content coding. <strong>Tools:</strong> Python, R, SQL.</p>
 </section>
 
