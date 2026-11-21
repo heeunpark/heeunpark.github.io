@@ -120,6 +120,10 @@
 
   /* Content */
   main { padding: 48px 0 40px 56px; max-width: 756px; border-left: 1px solid var(--rule); }
+  /* hierarchy through indentation: h2 flush, h3 and direct content +20px, content under an h3 +40px */
+  main section:not(#about) > h3,
+  main section:not(#about) > :not(h2):not(h3) { margin-left: 20px; }
+  main section:not(#about) > h3 ~ :not(h2):not(h3) { margin-left: 40px; }
   section { margin: 0 0 72px; scroll-margin-top: 32px; }
   h2 {
     font-family: var(--serif);
@@ -166,14 +170,14 @@
 
   details { margin: 20px 0 0; }
   summary {
-    list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 12px;
-    cursor: pointer; padding: 12px 16px; border: 1px solid var(--rule-strong); border-radius: 6px;
-    font-weight: 600; font-size: 0.95rem; color: var(--ink);
+    list-style: none; display: inline-flex; align-items: center; gap: 12px;
+    cursor: pointer; padding: 8px 14px; border: 1px solid var(--accent); border-radius: 6px;
+    background: var(--tint); font-weight: 600; font-size: 0.95rem; color: var(--accent);
   }
   summary::-webkit-details-marker { display: none; }
-  summary::after { content: "Show \25BE"; color: var(--accent); font-size: 0.9rem; white-space: nowrap; }
-  summary:hover { border-color: var(--accent); }
-  details[open] > summary { border-color: var(--accent); margin-bottom: 18px; }
+  summary::after { content: "Show \25BE"; color: var(--accent); font-size: 0.85rem; font-weight: 600; white-space: nowrap; padding-left: 12px; border-left: 1px solid var(--rule); }
+  summary:hover { filter: brightness(0.96); }
+  details[open] > summary { margin-bottom: 18px; }
   details[open] > summary::after { content: "Hide \25B4"; }
 
   .entry { margin: 0 0 18px; }
@@ -182,6 +186,7 @@
   .entry-head strong { font-weight: 650; flex: 1 1 0; min-width: 17em; }
   .when { color: var(--muted); font-size: 0.93rem; white-space: nowrap; }
   .sub { color: var(--muted); font-size: 0.95rem; margin: 2px 0 0; }
+  .entry > .sub, .entry > .bullets, .compact li > .sub { margin-left: 16px; }
   .sub.ink { color: var(--ink); }
   .bullets { margin: 8px 0 0; padding-left: 1.1rem; list-style: disc; }
   .bullets li { margin: 0 0 5px; padding-left: 2px; }
@@ -189,9 +194,13 @@
   .compact li { margin: 0; padding: 12px 0; border-top: 1px solid var(--rule); }
   .compact li:first-child { border-top: 0; padding-top: 0; }
 
-  footer { max-width: 756px; padding: 0 0 56px 56px; color: var(--muted); font-size: 0.9rem; }
+  footer { border-top: 1px solid var(--rule); padding: 20px 0 48px 56px; color: var(--muted); font-size: 0.9rem; }
 
   @media (max-width: 860px) {
+    .entry > .sub, .entry > .bullets, .compact li > .sub { margin-left: 10px; }
+    main section:not(#about) > h3,
+    main section:not(#about) > :not(h2):not(h3) { margin-left: 0; }
+    main section:not(#about) > h3 ~ :not(h2):not(h3) { margin-left: 14px; }
     .layout { display: block; padding: 0 22px; }
     aside { padding: 36px 0 0; }
     main { border-left: 0; padding-left: 0; max-width: none; }
@@ -275,7 +284,10 @@
   <div class="jmp">
     <div class="title">Extension Without Displacement: Interpretive Accretion in the Organizational Meaning of Emerging Technologies</div>
     <div class="venue"><span class="status">Working draft, November 2026</span></div>
-    <p class="abstract">Emerging technologies can acquire new organizational meanings without displacing what previously made them consequential. Interpretive accretion captures this form of development: new concerns enter while the preceding meaning configuration remains intact. The analysis uses 7,419 substantive AI-related claims from annual Form 10-K filings of large U.S. firms between 2016 and 2025 to construct annual configurations of eight organizational concern dimensions and examine 600 adjacent firm-year transitions. Dominant concerns changed in only 15.2% of transitions, yet interpretive accretion accounted for 29.7% of all transitions and 62.0% of those involving new concern entry. Accretion also recurred across consecutive transitions, such that meanings introduced as novelty in one period could become part of the continuity carried into the next. Novelty therefore need not redirect technological meaning; it can extend an intact prior configuration and, when retained, become part of subsequent continuity. This temporal relation distinguishes accretion from mere coexistence and from reconfiguration, while showing why a present configuration cannot fully reveal the developmental history through which it emerged. For innovation and technology management, this means that the management problem surrounding an emerging technology can broaden without redirecting its established technical or economic rationale.</p>
+    <p class="abstract">Emerging technologies can acquire new organizational meanings without displacing what previously made them consequential. Interpretive accretion captures this form of development: new concerns enter while the preceding meaning configuration remains intact.</p>
+    <p class="abstract">The analysis uses 7,419 substantive AI-related claims from annual Form 10-K filings of large U.S. firms between 2016 and 2025 to construct annual configurations of eight organizational concern dimensions and examine 600 adjacent firm-year transitions. Dominant concerns changed in only 15.2% of transitions, yet interpretive accretion accounted for 29.7% of all transitions and 62.0% of those involving new concern entry. Accretion also recurred across consecutive transitions, such that meanings introduced as novelty in one period could become part of the continuity carried into the next.</p>
+    <p class="abstract">Novelty therefore need not redirect technological meaning; it can extend an intact prior configuration and, when retained, become part of subsequent continuity. This temporal relation distinguishes accretion from mere coexistence and from reconfiguration, while showing why a present configuration cannot fully reveal the developmental history through which it emerged.</p>
+    <p class="abstract">For innovation and technology management, this means that the management problem surrounding an emerging technology can broaden without redirecting its established technical or economic rationale.</p>
     <p class="kw"><strong>Keywords:</strong> Emerging technologies; Technological frames; Organizational meaning; Interpretive accretion; Artificial intelligence; Technology management</p>
     <p><a class="dl" href="JMP.pdf"><svg class="icon" aria-hidden="true"><use href="#i-download"/></svg>Download the full paper (PDF, 37 pages)</a></p>
   </div>
@@ -337,7 +349,7 @@
     <li class="paper">
       <div class="title">When Technological Meaning Changes: Problem Representations and the Direction of External Capability Search</div>
       <div class="authors"><span class="me">Park, H. U.</span></div>
-      <div class="venue"><span class="status early">In preparation</span></div>
+      <div class="venue"><span class="status early">Manuscript in preparation</span></div>
     </li>
   </ul>
 
@@ -361,6 +373,7 @@
       </li>
       <li class="paper">
         <div class="title">When AI Actions Multiply: Implementation Portfolios and the Reorganization of Responsibility</div>
+        <div class="authors"><span class="me">Park, H. U.</span></div>
         <div class="venue"><span class="status early">In progress</span></div>
       </li>
     </ul>
@@ -457,15 +470,15 @@
   <ul class="compact">
     <li>
       <div class="entry-head"><strong>Founder, Soot: The Grill</strong><span class="when">2025&ndash;present</span></div>
-      <p class="sub">Korean barbecue restaurant in Suwon. Selected and implemented an AI-enabled robotic pre-grilling system and redesigned workflows around it.</p>
+      <p class="sub">Suwon, South Korea. Founded an independent Korean barbecue restaurant and led its concept, brand, space design, vendor selection, and launch. Selected and implemented a physical AI-enabled robotic pre-grilling system and redesigned workflows, staff responsibilities, and service processes around it. Oversee pricing, finance, staffing, suppliers, and marketing.</p>
     </li>
     <li>
       <div class="entry-head"><strong>Franchise Owner, Ohh!SALAD</strong><span class="when">2022&ndash;present</span></div>
-      <p class="sub">Daejeon.</p>
+      <p class="sub">Daejeon, South Korea. Manage franchise operations, including staffing, procurement, inventory, financial performance, and customer experience.</p>
     </li>
     <li>
       <div class="entry-head"><strong>Founder, Yeontan Gui Sil</strong><span class="when">2023&ndash;2025</span></div>
-      <p class="sub">Daejeon. Built the venture from concept and later sold the operating business.</p>
+      <p class="sub">Daejeon, South Korea. Conceived and launched an independent restaurant, directing branding, space design, equipment, and vendor selection. Built supplier networks, menu architecture, and pricing that held prices about 30% below nearby competitors while maintaining target margins. Negotiated and sold the operating business, completing the venture from concept to exit.</p>
     </li>
   </ul>
 
@@ -474,14 +487,15 @@
     <ul class="compact">
       <li>
         <div class="entry-head"><strong>Chief Operating Officer, Je Ne Sais Quoi International</strong><span class="when">2017&ndash;2018</span></div>
-        <p class="sub">Cashmere apparel brand.</p>
+        <p class="sub">Seoul, South Korea. Cashmere apparel brand. Directed operations, financial planning, and strategy; built the website and e-commerce storefront and ran digital marketing; integrated online and offline sales and marketing, contributing to an approximately 200% increase in sales.</p>
       </li>
       <li>
         <div class="entry-head"><strong>Business Management Staff, DoubleU Games</strong><span class="when">2016&ndash;2017</span></div>
-        <p class="sub">Strategy and analytics.</p>
+        <p class="sub">Seoul, South Korea. Strategy and analytics. Analyzed revenue, user engagement, and product performance using SQL and R on Oracle databases, and produced reports and forecasts for management decisions.</p>
       </li>
       <li>
         <div class="entry-head"><strong>Business Planning and Marketing, RGP Korea (Yogiyo / Baedaltong)</strong><span class="when">2015&ndash;2016</span></div>
+        <p class="sub">Seoul, South Korea. Launched a new business selling Yogiyo-branded delivery supplies to restaurant partners; designed a customer referral program later implemented within the Yogiyo platform; planned digital, offline, and television marketing campaigns.</p>
       </li>
     </ul>
   </details>
